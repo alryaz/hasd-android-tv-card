@@ -69,6 +69,16 @@ export class RemoteKeyboard extends BaseKeyboardElement {
 					renderTemplate(this.hass, this.keyboardMode) as string
 				).toUpperCase()
 			) {
+				case 'LG':
+				case 'WEBOS':
+				case 'WEBOSTV':
+					data.command = "com.webos.service.ime/insertText";
+					data.payload = {
+						text: text,
+						replace: false,
+					};
+					this.hass.callService('webostv', 'command', data);
+					break;
 				case 'KODI':
 					data.method = 'Input.SendText';
 					data.text = text;
@@ -101,6 +111,16 @@ export class RemoteKeyboard extends BaseKeyboardElement {
 					renderTemplate(this.hass, this.keyboardMode) as string
 				).toUpperCase()
 			) {
+				case 'LG':
+				case 'WEBOS':
+				case 'WEBOSTV':
+					data.command = "com.webos.service.ime/insertText";
+					data.payload = {
+						text: text,
+						replace: true,
+					};
+					this.hass.callService('webostv', 'command', data);
+					break;
 				case 'KODI':
 					data.method = 'Input.SendText';
 					data.text = text;
